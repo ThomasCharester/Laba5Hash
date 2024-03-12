@@ -5,71 +5,84 @@
 #include <string>
 #include <iostream>
 
-struct Product {
-	std::string name;
-	int price;
-	int dateOfProduction;
+#define nullProduct Ticket()
 
-	Product(int price = -1, std::string name = "", int dateOfProduction = -1) {
-		this->price = price;
-		this->name = name;
-		this->dateOfProduction = dateOfProduction;
+struct Ticket {
+	std::string destination;
+	int flightNum;
+	int time;
+	void enterInfo() {
+		std::cout << "\nEnter destination : ";
+		std::cin.ignore();
+		std::cin >> destination;
+		std::cout << "\nEnter flight number : ";
+		std::cin.ignore();
+		std::cin >> flightNum;
+		std::cout << "\nEnter start time : ";
+		std::cin.ignore();
+		std::cin >> time;
+		std::cout << '\n';
 	}
-	Product& operator = (const Product& product)
+	Ticket(int flightNum = -1, std::string destination = "", int time = -1) {
+		this->flightNum = flightNum;
+		this->destination = destination;
+		this->time = time;
+	}
+	Ticket& operator = (const Ticket& product)
 	{
-		price = product.price;
-		name = product.name;
-		dateOfProduction = product.dateOfProduction;
+		flightNum = product.flightNum;
+		destination = product.destination;
+		time = product.time;
 		return *this;   // возвращаем ссылку на текущий объект
 	}
-	bool operator == (const Product& product) const
+	bool operator == (const Ticket& product) const
 	{
-		return price == product.price;
+		return flightNum == product.flightNum;
 	}
-	bool operator != (const Product& product) const
+	bool operator != (const Ticket& product) const
 	{
-		return price != product.price;
+		return flightNum != product.flightNum;
 	}
-	bool operator > (const Product& product) const
+	bool operator > (const Ticket& product) const
 	{
-		return price > product.price;
+		return flightNum > product.flightNum;
 	}
-	bool operator < (const Product& product) const
+	bool operator < (const Ticket& product) const
 	{
-		return price < product.price;
+		return flightNum < product.flightNum;
 	}
-	Product& operator = (const int& number)
+	Ticket& operator = (const int& number)
 	{
-		price = number;
-		name = "";
-		dateOfProduction = number;
+		flightNum = number;
+		destination = "";
+		time = number;
 		return *this;   // возвращаем ссылку на текущий объект
 	}
 	bool operator == (const int& number) const
 	{
-		return price == number;
+		return flightNum == number;
 	}
 	bool operator != (const int& number) const
 	{
-		return price != number;
+		return flightNum != number;
 	}
 	bool operator > (const int& number) const
 	{
-		return price > number;
+		return flightNum > number;
 	}
 	bool operator < (const int& number) const
 	{
-		return price < number;
+		return flightNum < number;
 	}
 	int operator %(const int& number) {
-		return price % number;
+		return flightNum % number;
 	}
-	friend std::ostream& operator << (std::ostream& os, const Product& person);
-	operator int() const { return price; }
+	friend std::ostream& operator << (std::ostream& os, const Ticket& person);
+	operator int() const { return flightNum; }
 };
 
-std::ostream& operator << (std::ostream& os, const Product& person)
+std::ostream& operator << (std::ostream& os, const Ticket& person)
 {
-	return os << person.price << ' ' << person.name << ' ' << person.dateOfProduction;
+	return os << person.flightNum << ' ' << person.destination << ' ' << person.time;
 }
 #endif // !PRODUCT
